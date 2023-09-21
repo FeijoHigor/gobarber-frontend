@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.27",
+    "@types/yup": "^0.32.0",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.0.8",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
