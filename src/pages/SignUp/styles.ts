@@ -16,26 +16,26 @@ export const Content = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 700px;
+`;
 
-  > a {
-    color: #F4EDE8;
-    display: block;
-    margin-top: 24px;
-    text-decoration: none;
-    transition: color 0.2s;
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
 
-    display: flex;
-    align-items: center;
-    transition: color 0.2s;
-
-    svg {
-      margin-right: 16px;
-    }
-
-    &:hover {
-      color: ${shade(0.2, '#F4EDE8')};
-    }
   }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: ${appearFromRight} 1s;
 
   form {
     margin: 80px 0;
@@ -58,28 +58,26 @@ export const Content = styled.div`
       }
     }
   }
-`;
 
-const appearFromRight = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(50px);
+  > a {
+    color: #ff9000;
+    display: block;
+    margin-top: 24px;
+    text-decoration: none;
+    transition: color 0.2s;
 
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+
+    svg {
+      margin-right: 16px;
+    }
+
+    &:hover {
+      color: ${shade(0.2, '#ff9000')};
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-export const AnimationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  animation: ${appearFromRight} 1s;
-
-  
 `;
 
 export const Background = styled.div`
