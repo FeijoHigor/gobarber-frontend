@@ -4,7 +4,9 @@ import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
-import { useAuth } from '../../context/AuthContext.tsx'
+
+import { useToast } from '../../hooks/ToastContext.tsx'
+import { useAuth } from '../../hooks/AuthContext.tsx'
 
 import getValidationErrors from '../../utils/getValidationErrors.ts'
 
@@ -22,6 +24,7 @@ const SignIn = () => {
     const formRef = useRef<FormHandles>(null)
 
     const { user, signIn } = useAuth()
+    const { addToast } = useToast()
     console.log(user)                                   
 
     const handleSubmit = useCallback(async (data: SignInFormData) => {
@@ -36,16 +39,24 @@ const SignIn = () => {
                 abortEarly: false,
             })
 
-            signIn({
+            await signIn({
                 email: data.email,
                 password: data.password
             })
         } catch(err) {
-            const errors = getValidationErrors(err as Yup.ValidationError)
+            if(err instanceof Yup.ValidationError) {
+                const errors = getValidationErrors(err as Yup.ValidationError)
+                
+                formRef.current?.setErrors(errors)
+            }
             
-            formRef.current?.setErrors(errors)
+            addToast({
+                type: 'error',
+                title: 'Erro na autenticação',
+                description: 'Ocorreu um erro ao fazer login, cheque as credenciais.'
+            })
         }
-    }, [signIn])
+    }, [signIn, addToast])
 
     return (
         <Container>

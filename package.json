@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/styled-components": "^5.1.27",
-    "@types/yup": "^0.32.0",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^1.5.0",
@@ -19,12 +17,19 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
+    "react-spring": "^9.7.2",
     "styled-components": "^6.0.8",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13",
     "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/styled-components": "^5.1.27",
+    "@types/uuidv4": "^5.0.0",
+    "@types/yup": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",

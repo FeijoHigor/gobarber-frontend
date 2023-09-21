@@ -2,14 +2,14 @@ import GlobalStyle from "./styles/global"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 
-import { AuthProvider } from "./context/AuthContext"
+import AppProvider from "./hooks"
 
 const App = () => {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <SignIn />
-      </AuthProvider>
+      </AppProvider>
 
       <GlobalStyle />
     </>
