@@ -31,7 +31,7 @@ const Toast = ({ message, style }: ToastProps) => {
     }, [removeToast, message.id])
 
     return (
-        <Container hasDescription={!!message.description} type={message.type} style={style}>
+        <Container hasDescription={Number(!!message.description)} type={message.type} style={style}>
             {icons[message.type || 'info']}
 
             <div>
