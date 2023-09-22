@@ -4,18 +4,28 @@ import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import getValidationErrors from '../../utils/getValidationErrors.ts'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import api from '../../services/api.ts'
 
 import logoImg from '../../assets/logo.svg'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import { useCallback, useRef } from 'react'
+import { useToast } from '../../hooks/ToastContext.tsx'
+
+interface SignUpFormData {
+    name: string
+    email: string
+    password: string
+}
 
 const SignUp = () => {
     const formRef = useRef<FormHandles>(null)
+    const {addToast} = useToast()
+    const navigate = useNavigate()
 
-    const handleSubmit = useCallback(async (data: object) => {
+    const handleSubmit = useCallback(async (data: SignUpFormData) => {
         try {
             formRef.current?.setErrors({})
             const schema = Yup.object().shape({
@@ -28,12 +38,30 @@ const SignUp = () => {
                 abortEarly: false,
             })
 
+            await api.post('/users', data)
+
+            navigate('/')
+
+            addToast({
+                type: 'success',
+                title: 'Cadastro realizado!',
+                description: 'Você já pode fazer seu logon no GoBarber'
+            })
         } catch(err) {
-            const errors = getValidationErrors(err as Yup.ValidationError)
+            if(err instanceof Yup.ValidationError) {
+                const errors = getValidationErrors(err as Yup.ValidationError)
+                
+                formRef.current?.setErrors(errors)
+                return
+            }
             
-            formRef.current?.setErrors(errors)
+            addToast({
+                type: 'error',
+                title: 'Erro no cadastro',
+                description: 'Ocorreu um erro ao fazer cadastro, tente novamente.'
+            })
         }
-    }, [])
+    }, [addToast, navigate])
 
     return (
         <Container>

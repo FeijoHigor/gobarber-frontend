@@ -4,7 +4,7 @@ import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useToast } from '../../hooks/ToastContext.tsx'
 import { useAuth } from '../../hooks/AuthContext.tsx'
@@ -26,6 +26,7 @@ const SignIn = () => {
 
     const { user, signIn } = useAuth()
     const { addToast } = useToast()
+    const navigate = useNavigate()
     console.log(user)                                   
 
     const handleSubmit = useCallback(async (data: SignInFormData) => {
@@ -44,6 +45,8 @@ const SignIn = () => {
                 email: data.email,
                 password: data.password
             })
+
+            navigate('/dashboard')
         } catch(err) {
             if(err instanceof Yup.ValidationError) {
                 const errors = getValidationErrors(err as Yup.ValidationError)
